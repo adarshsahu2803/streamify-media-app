@@ -1,4 +1,14 @@
-// schema.prisma
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
 // Define the User table
 model User {
@@ -30,6 +40,7 @@ model Media {
   // Define the relationship with the User and Category tables
   user          User     @relation(fields: [user_id], references: [user_id])
   category      Category @relation(fields: [category_id], references: [category_id])
+  favorites   Favorites[]
 }
 
 // Define the Category table
@@ -43,13 +54,15 @@ model Category {
 
 // Define the Favorites table
 model Favorites {
-  user_id       Int      @id
-  media_id      Int      @id
+  user_id       Int      
+  media_id      Int     
   added_at      DateTime @default(now())
 
   // Define the relationship with the User and Media tables
   user          User     @relation(fields: [user_id], references: [user_id])
   media         Media    @relation(fields: [media_id], references: [media_id])
+
+  @@id([user_id, media_id])
 }
 
 // Define the ThemePreference table
