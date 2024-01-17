@@ -1,0 +1,16 @@
+.Frame {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+  }
+  
+  .Podstream {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    /* background: ${({ theme }) => theme.bgLight}; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  
